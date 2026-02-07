@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hello Tickets</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header>
+    <img src="logo.png" alt="Logo">
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="tickets.html">Tickets</a>
+        <a href="statistiques.html">Statistiques</a>
+    </nav>
+</header>
+
+<h1>Ouverture du ticket</h1>
+
+<form id="ticketForm">
+    <label for="title">Titre</label>
+    <input type="text" id="title" name="title">
+
+    <label for="comment">Description</label>
+    <input type="text" id="comment" name="comment">
+
+    <button type="submit">Envoyer</button>
+</form>
+
+<a class="link-home" href="tickets.html">Voir vos tickets en cours</a>
+
+<footer>
+    v1.3.1
+</footer>
+
+<script>
+  document.getElementById('ticketForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const title = e.target.title.value.trim();
+    const comment = e.target.comment.value.trim();
+
+    try {
+      const response = await fetch('http://localhost:8888/save-ticket', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({ title, comment })
+      });
+
+      if (!response.ok) {
+        alert('Erreur lors de la création du ticket');
+        return;
+      }
+
+      window.location.href = 'tickets.html';
+    } catch (err) {
+      alert('Erreur réseau');
+    }
+  });
+</script>
+
+</body>
+</html>
