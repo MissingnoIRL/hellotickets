@@ -33,34 +33,10 @@
 <a class="link-home" href="tickets.html">Voir vos tickets en cours</a>
 
 <footer>
-    v1.3.1
+    vAlpha
 </footer>
 
-<script>
-  document.getElementById('ticketForm').addEventListener('submit', async (e) => {
-    e.preventDefault();
-
-    const title = e.target.title.value.trim();
-    const comment = e.target.comment.value.trim();
-
-    try {
-      const response = await fetch('http://localhost:8888/save-ticket', {
-        method: 'POST',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({ title, comment })
-      });
-
-      if (!response.ok) {
-        alert('Erreur lors de la création du ticket');
-        return;
-      }
-
-      window.location.href = 'tickets.html';
-    } catch (err) {
-      alert('Erreur réseau');
-    }
-  });
-</script>
+<script src="app.js"></script>
 
 </body>
 </html>
